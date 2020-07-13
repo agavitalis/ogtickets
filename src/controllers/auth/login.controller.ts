@@ -36,14 +36,14 @@ export class LoginController extends Controller {
 
             }else{
                 
-                this.setStatus(302);
+                this.setStatus(400);
                 return {
                     "message":"Invalid user credentials",
                 };
             }
         }else{
           
-            this.setStatus(302);
+            this.setStatus(400);
             return {
                 "message":"User not registered",
             };

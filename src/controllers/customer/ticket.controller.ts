@@ -23,7 +23,7 @@ export class UserTicketController extends Controller {
             message = "Support Ticket successfully created"
 
         }).catch(() => {
-            this.setStatus(301);
+            this.setStatus(500);
             message = "Support NOT creeated"
 
         })
@@ -53,14 +53,14 @@ export class UserTicketController extends Controller {
                 };
             }
             else{
-                this.setStatus(500);
+                this.setStatus(400);
                 return {
                     message:"No ticket found"
                 };
             }
 
         }else{
-            this.setStatus(300);
+            this.setStatus(400);
             return {
                 message:"Invalid Customer ID"
             };
@@ -87,14 +87,14 @@ export class UserTicketController extends Controller {
                 };
             }
             else{
-                this.setStatus(500);
+                this.setStatus(400);
                 return {
                     message:"No ticket found"
                 };
             }
             
         }else{
-            this.setStatus(300);
+            this.setStatus(400);
             return {
                 message:"Invalid Ticket ID supplied"
             };
@@ -119,14 +119,14 @@ export class UserTicketController extends Controller {
                    status: ticket.status
                 };
             }else{
-                this.setStatus(401);
+                this.setStatus(400);
                 return {
                    message: "Ticket with that ID is not found"
                 };
             }
 
         }else{
-            this.setStatus(300);
+            this.setStatus(400);
             return {
                 message:"Invalid Ticket ID supplied"
             };

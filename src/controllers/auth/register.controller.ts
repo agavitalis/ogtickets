@@ -41,7 +41,7 @@ export class RegisterController extends Controller {
 
         let checkUser: any = await UserModel.countDocuments({ email: requestBody.email })
         if (checkUser > 0) {
-            this.setStatus(301);
+            this.setStatus(400);
             return {
                 "message": "A User with this email already exist",
             };

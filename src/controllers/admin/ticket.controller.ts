@@ -41,14 +41,14 @@ export class AdminTicketController extends Controller {
                 };
             }
             else{
-                this.setStatus(404);
+                this.setStatus(400);
                 return {
-                    message:"No tickets found"
+                    message:"No tickets found matching the given ID"
                 };
             }
 
         }else{
-            this.setStatus(300);
+            this.setStatus(400);
             return {
                 message:"Invalid Ticket ID supplied"
             };

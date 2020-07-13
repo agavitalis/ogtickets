@@ -43,14 +43,14 @@ export class AdminCommentController extends Controller {
                 };
             }
             else{
-                this.setStatus(404);
+                this.setStatus(400);
                 return {
                     message:"No comments found"
                 };
             }
 
         }else{
-            this.setStatus(300);
+            this.setStatus(400);
             return {
                 message:"Invalid Comment ID supplied"
             };
@@ -79,14 +79,14 @@ export class AdminCommentController extends Controller {
 
             }else{
 
-                this.setStatus(300);
+                this.setStatus(400);
                 return {
                     message:"Comment with that ID was not found"
                 };
             }
 
         }else{
-            this.setStatus(300);
+            this.setStatus(400);
             return {
                 message:"Invalid Comment ID supplied"
             };
