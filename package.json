@@ -1,0 +1,39 @@
+{
+  "name": "ogtickets",
+  "version": "1.0.0",
+  "description": "A Modern Ticketing system built on Node and Typescript",
+  "main": "index.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "json2csv": "^5.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.21",
+    "pdfkit": "^0.11.0",
+    "supertest": "^4.0.2",
+    "swagger-ui-express": "^4.1.4",
+    "ts-node": "^8.10.2",
+    "tsoa": "^3.2.1",
+    "typed-rest-client": "^1.7.3",
+    "typescript": "^3.9.6"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/jest": "^26.0.4",
+    "@types/mongoose": "^5.7.29",
+    "@types/node": "^14.0.14",
+    "jest": "^26.1.0",
+    "nodemon": "^2.0.4",
+    "ts-jest": "^26.1.1"
+  },
+  "scripts": {
+    "start": "nodemon -x ts-node src/main.ts",
+    "test": "jest",
+    "generate": "tsoa swagger && tsoa routes",
+    "test:mocha": "mocha -r ts-node/register tests/**/*.ts"
+  },
+  "author": "Ogbonna Vitalis",
+  "license": "ISC"
+}

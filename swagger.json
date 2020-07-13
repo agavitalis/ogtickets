@@ -1,0 +1,898 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"IResponseOfAny": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": {}
+			},
+			"IUserRegister": {
+				"properties": {
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"firstName",
+					"lastName",
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IUserLogin": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICreateTicket": {
+				"properties": {
+					"userId": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"body": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"userId",
+					"title",
+					"body"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ICreateComment": {
+				"properties": {
+					"userId": {
+						"type": "string"
+					},
+					"ticketId": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"body": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"userId",
+					"ticketId",
+					"title",
+					"body"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IChangeTicketStatus": {
+				"properties": {
+					"ticketId": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"ticketId",
+					"status"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"api_key": {
+				"type": "apiKey",
+				"name": "x-access-token",
+				"in": "header"
+			},
+			"tsoa_auth": {
+				"type": "oauth2",
+				"flows": {
+					"implicit": {
+						"authorizationUrl": "http://swagger.io/api/oauth/dialog",
+						"scopes": {
+							"write:pets": "modify things",
+							"read:pets": "read things"
+						}
+					}
+				}
+			}
+		}
+	},
+	"info": {
+		"title": "ogtickets",
+		"version": "1.0.0",
+		"description": "A Modern Ticketing system built on Node and Typescript",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Ogbonna Vitalis"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/api/register": {
+			"get": {
+				"operationId": "TestEndpoint",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth: User Registration"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "RegisterUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth: User Registration"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUserRegister"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/login": {
+			"post": {
+				"operationId": "LoginUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Auth: User Login"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IUserLogin"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/customer/createATicket": {
+			"post": {
+				"operationId": "CreateATicket",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Customer: Tickets"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICreateTicket"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/customer/getAllCustomerTickets/{customerId}": {
+			"get": {
+				"operationId": "GetAllCustomerTickets",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Customer: Tickets"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "customerId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/customer/getACustomerTicket/{ticketId}": {
+			"get": {
+				"operationId": "GetACustomerTicket",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Customer: Tickets"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "ticketId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/customer/getATicketStatus/{ticketId}": {
+			"get": {
+				"operationId": "GetATicketStatus",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Customer: Tickets"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "ticketId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/customer/commentOnATicket": {
+			"put": {
+				"operationId": "CommentOnATicket",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Customer: Comments"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICreateComment"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/support/getAllTickets": {
+			"get": {
+				"operationId": "GetAllTickets",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Support: Tickets"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/api/support/getATicket/{ticketId}": {
+			"get": {
+				"operationId": "GetATicket",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Support: Tickets"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "ticketId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/support/changeTicketStatus": {
+			"put": {
+				"operationId": "ChangeTicketStatus",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Support: Tickets"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IChangeTicketStatus"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/support/generateReportCSV": {
+			"get": {
+				"operationId": "GenerateReportCSV",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Support: Tickets"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/api/support/downloadReportCSV": {
+			"get": {
+				"operationId": "DownloadReportCSV",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Support: Tickets"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/api/support/generateReportPDF": {
+			"get": {
+				"operationId": "GenerateReportPDF",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"message"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Support: Tickets"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/api/support/downloadReportPDF": {
+			"get": {
+				"operationId": "DownloadReportPDF",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Support: Tickets"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/api/support/commentOnATicket": {
+			"put": {
+				"operationId": "CommentOnATicket",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Support: Comments"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ICreateComment"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/admin/getAllUsers": {
+			"get": {
+				"operationId": "GetAllUsers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Admin: User Manager"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/api/admin/getAUser/{userId}": {
+			"get": {
+				"operationId": "GetAUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Admin: User Manager"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/admin/deleteAUser/{userId}": {
+			"delete": {
+				"operationId": "DeleteAUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Admin: User Manager"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/admin/getAllTickets": {
+			"get": {
+				"operationId": "GetAllTickets",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Admin: Ticket Manager"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/api/admin/getATicket/{ticketId}": {
+			"get": {
+				"operationId": "GetATicket",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Admin: Ticket Manager"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "ticketId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/admin/IChangeTicketStatus": {
+			"put": {
+				"operationId": "ChangeTicketStatus",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Admin: Ticket Manager"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IChangeTicketStatus"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/admin/deleteATicket/{ticketId}": {
+			"delete": {
+				"operationId": "Remove",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Admin: Ticket Manager"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "ticketId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/admin/getAllComments": {
+			"get": {
+				"operationId": "GetAllComments",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Admin: Comments Manager"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/api/admin/getAComment/{commentId}": {
+			"get": {
+				"operationId": "GetAComment",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Admin: Comments Manager"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "commentId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/api/admin/deleteAComment/{commentId}": {
+			"delete": {
+				"operationId": "Remove",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IResponseOfAny"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Admin: Comments Manager"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "commentId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
